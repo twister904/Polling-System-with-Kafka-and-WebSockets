@@ -7,7 +7,9 @@
   </head>
   <body>
     <h1>Polling System</h1>
+    <h2>poll results</h2>
     <div id="poll-results"></div>
+    <h2>leaderboard</h2>
     <div id="leaderboard"></div>
 
     <script type="module">
@@ -24,6 +26,7 @@
 
       wsClient.on("pollUpdate", (data) => {
         console.log("Poll update received:", data);
+        console.log("poll updates rendered");
         const pollResultsContainer = document.getElementById("poll-results");
         pollResultsContainer.innerHTML = JSON.stringify(data.results, null, 2);
       });

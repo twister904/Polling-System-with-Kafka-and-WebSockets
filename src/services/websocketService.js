@@ -7,16 +7,18 @@ const clients = new Map(); // Map to track clients and their subscriptions
 wss.on("connection", (ws, req) => {
   console.log("New client connected");
 
-  // Track the client's subscribed poll ID
   ws.on("message", (message) => {
-    const { action, pollId } = JSON.parse(message);
-    if (action === "subscribe" && pollId) {
-      clients.set(ws, pollId);
-      console.log(`Client subscribed to poll ID: ${pollId}`);
+    try {
+      const { action, pollId } = JSON.parse(message);
+      if (action === "subscribe" && pollId) {
+        clients.set(ws, pollId);
+        console.log(`Client subscribed to poll ID: ${pollId}`);
+      }
+    } catch (err) {
+      console.error("Error parsing WebSocket message:", err);
     }
   });
 
-  // Remove client from tracking on disconnect
   ws.on("close", () => {
     console.log("Client disconnected");
     clients.delete(ws);
@@ -25,9 +27,22 @@ wss.on("connection", (ws, req) => {
 
 // Broadcast updates to relevant clients
 export const broadcastUpdate = (pollId, results) => {
+  console.log("Broadcasting poll update:", { pollId, results });
   clients.forEach((subscribedPollId, client) => {
-    if (subscribedPollId === pollId && client.readyState === client.OPEN) {
-      client.send(JSON.stringify({ pollId, results }));
+    console.log(
+      `Client subscribed to poll ID: ${subscribedPollId}, Poll ID to broadcast: ${pollId}`
+    );
+    const message = { type: "pollUpdate", pollId, results };
+    if (subscribedPollId == pollId) {
+      console.log(`Client readyState: ${client.readyState}`);
+      if (client.readyState === client.OPEN) {
+        client.send(JSON.stringify(message));
+        console.log(
+          `Poll update sent to client subscribed to poll ID: ${pollId}`
+        );
+      } else {
+        console.warn("Client is not in OPEN state; skipping broadcast.");
+      }
     }
   });
 };
@@ -35,6 +50,7 @@ export const broadcastUpdate = (pollId, results) => {
 export const broadcastLeaderboard = (leaderboard) => {
   clients.forEach((_, client) => {
     if (client.readyState === client.OPEN) {
+      console.log("broadcastLeaderboard called");
       client.send(JSON.stringify({ type: "leaderboard", leaderboard }));
     }
   });

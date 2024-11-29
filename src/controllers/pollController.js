@@ -63,6 +63,8 @@ export const fetchPollResultsHandler = async (req, res) => {
   }
 };
 
+
+
 export const leaderboardHandler = async (req, res) => {
   try {
     const leaderboard = await db.query(

@@ -36,6 +36,7 @@ class WebSocketClient {
       console.log("Message received:", data);
 
       // Trigger the appropriate callback
+      console.log(data.type);
       if (data.type && this.callbacks[data.type]) {
         this.callbacks[data.type](data);
       }

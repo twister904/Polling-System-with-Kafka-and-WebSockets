@@ -32,21 +32,18 @@ export const consumeVotes = async () => {
         console.log(`[${topic}] part: ${partition}`, message.value.toString());
 
         // Broadcast updated poll results to WebSocket clients
-        broadcastUpdate({
-          pollId: vote.pollId,
-          results: pollResults,
-        });
 
         console.log("Vote processed successfully:", updatedOption);
-          const leaderboard = await fetchLeaderboard();
-          broadcastLeaderboard(leaderboard);
+        const leaderboard = await fetchLeaderboard();
+        console.log(pollResults);
+        broadcastUpdate(vote.pollId, pollResults);
+        broadcastLeaderboard(leaderboard);
       } catch (error) {
         console.error("Error processing vote:", error);
       }
     },
   });
   // Fetch the leaderboard and broadcast updates
-
 };
 
 // Helper function to fetch updated poll results
