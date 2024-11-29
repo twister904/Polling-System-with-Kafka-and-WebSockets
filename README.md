@@ -1,5 +1,3 @@
-Here’s your updated `README.md` formatted correctly in Markdown:
-
 ```markdown
 # Polling System with Kafka and WebSockets
 
