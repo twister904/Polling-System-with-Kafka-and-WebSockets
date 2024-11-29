@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Polling System</title>
+  </head>
+  <body>
+    <h1>Polling System</h1>
+    <div id="poll-results"></div>
+    <div id="leaderboard"></div>
+
+    <script type="module">
+      import WebSocketClient from "./js/client.js";
+
+      const wsClient = new WebSocketClient("ws://localhost:8080");
+
+      wsClient.listen();
+
+      const pollId = 9;
+
+      // Subscribe to poll only after the WebSocket is open
+      wsClient.subscribeToPoll(pollId);
+
+      wsClient.on("pollUpdate", (data) => {
+        console.log("Poll update received:", data);
+        const pollResultsContainer = document.getElementById("poll-results");
+        pollResultsContainer.innerHTML = JSON.stringify(data.results, null, 2);
+      });
+
+      wsClient.on("leaderboard", (data) => {
+        console.log("Leaderboard update received:", data);
+        const leaderboardContainer = document.getElementById("leaderboard");
+        leaderboardContainer.innerHTML = JSON.stringify(
+          data.leaderboard,
+          null,
+          2
+        );
+      });
+    </script>
+  </body>
+</html>
