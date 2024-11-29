@@ -1,6 +1,7 @@
 Updated README.md
 markdown
 Copy code
+
 # Polling System with Kafka and WebSockets
 
 A real-time polling system built with **Kafka** for message processing and **WebSockets** for real-time updates. This project allows users to create polls, vote on options, and view the results in real-time through a WebSocket connection. Additionally, the leaderboard feature ranks the top poll options across all active polls.
@@ -35,15 +36,15 @@ Before running the application, ensure you have the following installed:
 You can easily run **Kafka** and **Zookeeper** using Docker.
 
 #### 1. **Running Zookeeper**
+
 To run Zookeeper using Docker, run the following command:
 
-```bash
+````bash
 docker run -p 2181:2181 zookeeper
 2. Running Kafka
 To run Kafka, use the following command (replace <YOUR IP> with your actual IP address):
 
-bash
-Copy code
+
 docker run -p 9092:9092 -e KAFKA_ZOOKEEPER_CONNECT=<YOUR IP>:2181 -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://<YOUR IP>:9092 -e KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1 confluentinc/cp-kafka
 Ensure that both Zookeeper and Kafka are running. You can check the logs to verify that Kafka has connected to Zookeeper and is ready to accept messages.
 
@@ -212,3 +213,4 @@ Copy code
 
 
 
+````
