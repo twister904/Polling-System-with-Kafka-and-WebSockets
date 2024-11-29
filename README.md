@@ -44,21 +44,21 @@ docker run -p 2181:2181 zookeeper
 2. Running Kafka
 To run Kafka, use the following command (replace <YOUR IP> with your actual IP address):
 
+````bash
 
 docker run -p 9092:9092 -e KAFKA_ZOOKEEPER_CONNECT=<YOUR IP>:2181 -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://<YOUR IP>:9092 -e KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1 confluentinc/cp-kafka
 Ensure that both Zookeeper and Kafka are running. You can check the logs to verify that Kafka has connected to Zookeeper and is ready to accept messages.
 
 Setup
 1. Clone the Repository
-bash
-Copy code
+
+````bash
 git clone https://github.com/yourusername/Polling-System-with-Kafka-and-WebSockets.git
 cd Polling-System-with-Kafka-and-WebSockets
 2. Install Dependencies
 Run the following command to install the required dependencies:
 
-bash
-Copy code
+````bash
 npm install
 3. Set Up PostgreSQL Database
 Ensure PostgreSQL is running, and create a database for the polling system.
@@ -86,8 +86,7 @@ Replace <YOUR IP> with your actual local or external IP where Kafka is running.
 5. Running the Application
 Start the WebSocket Server: In the root directory, start the application:
 
-bash
-Copy code
+````bash
 npm start
 The application will start and should be accessible at http://localhost:3000.
 
@@ -195,17 +194,6 @@ Push to your fork and create a pull request.
 License
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-yaml
-Copy code
-
----
-
-### **Final Steps**
-1. **Push the `README.md` to GitHub**:
-   ```bash
-   git add README.md
-   git commit -m "Update README with Docker and API details"
-   git push
 
 
 
