@@ -1,4 +1,4 @@
-```markdown
+
 # Polling System with Kafka and WebSockets
 
 A real-time polling system built with **Kafka** for message processing and **WebSockets** for real-time updates. This project allows users to create polls, vote on options, and view the results in real-time through a WebSocket connection. Additionally, the leaderboard feature ranks the top poll options across all active polls.
