@@ -247,12 +247,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-### **Final Steps**
-1. **Save the File**: Save this as `README.md` in the root of your project.
-2. **Push to GitHub**:
-   ```bash
-   git add README.md
-   git commit -m "Update README with Docker and API details"
-   git push
-   ```
+```
 
